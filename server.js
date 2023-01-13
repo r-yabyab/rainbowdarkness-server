@@ -3,10 +3,13 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const path = require("path")
 const rainbowRoutes = require('./routes/rainbowRoutes')
 
 
 const app = express()
+
+
 
 //middleware
 app.use(express.json())
@@ -23,18 +26,21 @@ app.use('/api/rainbows', rainbowRoutes)
 //     res.send("test")
 // })
 
-// doesn't work, yt tutorial sucks
-// vercel - gets frontend running through backend
-// app.get("*", function (_, res) {
-//     res.sendFile(
-//         path.join(__dirname, "./client/build/index.html"),
-//         function (err) {
-//             if (err) {
-//                 res.status(500).send(err);
-//             }
-//         }
-//     )
-// })
+const _dirname = path.dirname("")
+const buildPath = path.join(_dirname , "../client/build")
+app.use(express.static(buildPath))
+
+// gets frontend running through backend
+app.get("*", function (req, res) {
+    res.sendFile(
+        path.join(__dirname, "../client/build/index.html"),
+        function (err) {
+            if (err) {
+                res.status(500).send(err);
+            }
+        }
+    )
+})
 
 mongoose.connect(process.env.MONG_URI)
     .then(() => {
