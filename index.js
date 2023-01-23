@@ -5,17 +5,8 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const path = require("path")
 const rainbowRoutes = require('./routes/rainbowRoutes')
-const rateLimit = require("express-rate-limit")
-
 
 const app = express()
-
-const apiLimiter = rateLimit({
-    windowMs: 86400000, //24 hours
-    max: 1,
-    standardHeaders: true,
-    legacyHeaders: false,
-})
 
 //middleware
 app.use(express.json())
@@ -27,7 +18,6 @@ app.use((req, res, next) => {
 })
 
 
-app.use('/api/rainbows', apiLimiter)
 app.use('/api/rainbows', rainbowRoutes)
 
 // app.get('/api/rainbows', (req, res) => {
