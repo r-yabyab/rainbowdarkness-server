@@ -1,5 +1,5 @@
 const express = require("express")
-const rateLimit, { MemoryStore } = require("express-rate-limit")
+const rateLimit = require("express-rate-limit")
 const {
     postRainbow,
     getAllRainbow
@@ -13,7 +13,7 @@ const apiLimiter = rateLimit({
     max: 1,
     standardHeaders: true,
     legacyHeaders: false,
-    store: new MemoryStore();
+    store: new rateLimit.MemoryStore(),
 })
 
 
