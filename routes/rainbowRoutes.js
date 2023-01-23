@@ -1,4 +1,5 @@
 const express = require("express")
+const rateLimit, { MemoryStore } = require("express-rate-limit")
 const {
     postRainbow,
     getAllRainbow
@@ -7,11 +8,17 @@ const {
 const router = express.Router()
 
 
-
+const apiLimiter = rateLimit({
+    windowMs: 86400000, //24 hours
+    max: 1,
+    standardHeaders: true,
+    legacyHeaders: false,
+    store: new MemoryStore();
+})
 
 
 // post to DB
-router.post('/', postRainbow)
+router.post('/', apiLimiter, postRainbow)
 
 // fetch from DB
 router.get('/', getAllRainbow)
