@@ -18,7 +18,8 @@ const apiLimiter = rateLimit({
 
 
 // post to DB
-router.post('/', apiLimiter, postRainbow)
+// router.post('/', apiLimiter, postRainbow)
+router.post('/', postRainbow)
 
 // fetch from DB
 router.get('/', getAllRainbow)
