@@ -40,10 +40,10 @@ const getAllRainbow = async (req, res) => {
   res.status(200).json(rainbows)
 }
 
-const getLatestRainbow = async (req, res) => {
-  const latestRainbow = await Rainbow.findOne({}, { sort: { createdAt: -1 } });
-  res.status(200).json(latestRainbow);
-};
+// const getLatestRainbow = async (req, res) => {
+//   const latestRainbow = await Rainbow.findOne({}, { sort: { createdAt: -1 } });
+//   res.status(200).json(latestRainbow);
+// };
 
 
 // get average
@@ -66,6 +66,5 @@ const getLatestRainbow = async (req, res) => {
 
 module.exports = {
     postRainbow,
-    getAllRainbow,
-    getLatestRainbow
+    getAllRainbow
 }

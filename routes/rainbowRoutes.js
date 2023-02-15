@@ -2,8 +2,7 @@ const express = require("express")
 const rateLimit = require("express-rate-limit")
 const {
     postRainbow,
-    getAllRainbow,
-    getLatestRainbow
+    getAllRainbow
 } = require('../controllers/rainbowController')
 
 const router = express.Router()
@@ -25,7 +24,7 @@ router.post('/', apiLimiter, postRainbow)
 // fetch from DB
 router.get('/', getAllRainbow)
 
-router.get('/', getLatestRainbow)
+// router.get('/', getLatestRainbow)
 
 
 
