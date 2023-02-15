@@ -25,7 +25,7 @@ router.post('/', apiLimiter, postRainbow)
 // fetch from DB
 router.get('/', getAllRainbow)
 
-router.get('/latest', getLatestRainbow)
+router.get('/', getLatestRainbow)
 
 
 
