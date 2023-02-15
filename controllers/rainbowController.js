@@ -34,9 +34,9 @@ const getAllRainbow = async (req, res) => {
         'avgPrice': {
           '$avg': '$number'
         }
-      }
-    }
-    {
+      },
+    
+    
       $match: {
         createdAt: {
           $gte: new Date(new Date().setHours(0,0,0,0) - 7 * 24 * 60 * 60 * 1000) // Filter for documents created within the past week
@@ -57,6 +57,7 @@ const getAllRainbow = async (req, res) => {
         documentCount: 1 // Exclude the _id field and only return the count
       }
     }
+
   ])
   res.status(200).json(rainbows)
 }
