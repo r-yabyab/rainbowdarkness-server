@@ -41,7 +41,7 @@ const getAllRainbow = async (req, res) => {
 }
 
 const getLatestRainbow = async (req, res) => {
-  const latestRainbow = await Rainbow.findOne({}, { sort: { submissionDate: -1 } });
+  const latestRainbow = await Rainbow.findOne({}, { sort: { createdAt: -1 } });
   res.status(200).json(latestRainbow);
 };
 
