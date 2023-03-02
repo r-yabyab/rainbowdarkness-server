@@ -40,6 +40,19 @@ const getAllRainbow = async (req, res) => {
   res.status(200).json(rainbows)
 }
 
+const getLast = async (req, res) => {
+  const rainbowsLast = await Rainbow.aggregate([
+    {
+      '$sort': {
+        'createdAt': -1
+      }
+    }, {
+      '$limit': 10
+    }
+  ])
+  res.status(200).json(rainbowsLast)
+}
+
 // const getLatestRainbow = async (req, res) => {
 //   const latestRainbow = await Rainbow.findOne({}, { sort: { createdAt: -1 } });
 //   res.status(200).json(latestRainbow);
@@ -66,5 +79,6 @@ const getAllRainbow = async (req, res) => {
 
 module.exports = {
     postRainbow,
-    getAllRainbow
+    getAllRainbow,
+    getLast
 }
