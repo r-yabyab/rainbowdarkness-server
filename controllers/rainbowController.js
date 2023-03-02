@@ -42,13 +42,15 @@ const getAllRainbow = async (req, res) => {
 
 const getLast = async (req, res) => {
   const rainbowsLast = await Rainbow.aggregate([
+    // created at -1 descending (most recent), limit for # of items
     {
       '$sort': {
         'createdAt': -1
       }
-    }, {
-      '$limit': 10
-    }
+    }, 
+    // {
+    //   '$limit': 10
+    // }
   ])
   res.status(200).json(rainbowsLast)
 }
