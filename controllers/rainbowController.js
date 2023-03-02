@@ -48,9 +48,9 @@ const getLast = async (req, res) => {
         'createdAt': -1
       }
     }, 
-    {
-      '$limit': 25
-    }
+    // {
+    //   '$limit': 25
+    // }
   ])
   res.status(200).json(rainbowsLast)
 }
