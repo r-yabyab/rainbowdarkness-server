@@ -55,6 +55,28 @@ const getLast = async (req, res) => {
   res.status(200).json(rainbowsLast)
 }
 
+
+
+const startOfWeek = new Date();
+startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+startOfWeek.setHours(0, 0, 0, 0);
+
+const getWeek = async (req, res) => {
+ const rainbowWeek = await Rainbow.aggregate([
+  {
+    $match: {
+      createdAt: { $gte: startOfWeek }
+    }
+  },
+  {
+    $sort: {
+      createdAt: 1
+    }
+  }
+])
+res.status(200).json(rainbowWeek)
+}
+
 // const getLatestRainbow = async (req, res) => {
 //   const latestRainbow = await Rainbow.findOne({}, { sort: { createdAt: -1 } });
 //   res.status(200).json(latestRainbow);
@@ -82,5 +104,6 @@ const getLast = async (req, res) => {
 module.exports = {
     postRainbow,
     getAllRainbow,
-    getLast
+    getLast,
+    getWeek
 }
