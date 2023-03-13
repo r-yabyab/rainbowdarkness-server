@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const path = require("path")
+// const path = require("path")
 const rainbowRoutes = require('./routes/rainbowRoutes')
 
 const app = express()
@@ -20,25 +20,22 @@ app.use((req, res, next) => {
 
 app.use('/api/rainbows', rainbowRoutes)
 
-// app.get('/api/rainbows', (req, res) => {
-//     res.send("test")
+
+// const _dirname = path.dirname("")
+// const buildPath = path.join(_dirname , "../client/build")
+// app.use(express.static(buildPath))
+
+// // gets frontend running through backend
+// app.get("/*", function(req, res) {
+//     res.sendFile(
+//         path.join(__dirname, "../client/build/index.html"),
+//         function (err) {
+//             if (err) {
+//                 res.status(500).send(err);
+//             }
+//         }
+//     )
 // })
-
-const _dirname = path.dirname("")
-const buildPath = path.join(_dirname , "../client/build")
-app.use(express.static(buildPath))
-
-// gets frontend running through backend
-app.get("/*", function(req, res) {
-    res.sendFile(
-        path.join(__dirname, "../client/build/index.html"),
-        function (err) {
-            if (err) {
-                res.status(500).send(err);
-            }
-        }
-    )
-})
 
 mongoose.connect(process.env.MONG_URI)
     .then(() => {
