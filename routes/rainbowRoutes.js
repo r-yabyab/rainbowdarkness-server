@@ -4,7 +4,8 @@ const {
     postRainbow,
     getAllRainbow,
     getLast,
-    getWeek
+    getWeek,
+    getToday
 } = require('../controllers/rainbowController')
 
 const router = express.Router()
@@ -29,6 +30,8 @@ router.get('/', getAllRainbow)
 router.get('/last', getLast)
 
 router.get('/week', getWeek)
+
+router.get('/today', getToday)
 
 
 // router.get('/', getLatestRainbow)
