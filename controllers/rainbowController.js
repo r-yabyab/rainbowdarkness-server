@@ -40,6 +40,23 @@ const getAllRainbow = async (req, res) => {
   res.status(200).json(rainbows)
 }
 
+const getSingleRainbow = async (req, res) => {
+  const { id } = req.params
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such number'})
+  }
+
+  const rainbows = await Rainbow.findById(id)
+
+  if (!rainbows) {
+    return res.status(404).json({error: "no such number"})
+  }
+
+  res.status(200).json(rainbows)
+
+}
+
 const getLast = async (req, res) => {
   const rainbowsLast = await Rainbow.aggregate([
     // created at -1 descending (most recent), limit for # of items
@@ -126,6 +143,7 @@ res.status(200).json(rainbowToday)
 module.exports = {
     postRainbow,
     getAllRainbow,
+    getSingleRainbow,
     getLast,
     getWeek,
     getToday

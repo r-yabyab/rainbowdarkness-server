@@ -3,6 +3,7 @@ const rateLimit = require("express-rate-limit")
 const {
     postRainbow,
     getAllRainbow,
+    getSingleRainbow,
     getLast,
     getWeek,
     getToday
@@ -24,9 +25,13 @@ const apiLimiter = rateLimit({
 router.post('/', apiLimiter, postRainbow)
 // router.post('/', postRainbow)
 
-// fetch from DB
+    // fetch from DB
+// get total submissions + average
 router.get('/', getAllRainbow)
 
+router.get('/:id', getSingleRainbow)
+
+//get all from most recent
 router.get('/last', getLast)
 
 router.get('/week', getWeek)
