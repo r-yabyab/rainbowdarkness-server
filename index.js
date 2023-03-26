@@ -23,9 +23,8 @@ const app = express()
     const openai = new OpenAIApi(configuration)
     
 //middleware
-app.use(express.json())
 app.use(cors());
-
+app.use(express.json())
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
@@ -35,7 +34,7 @@ app.use((req, res, next) => {
 app.use('/api/rainbows', rainbowRoutes)
 
 
-app.get('/aineg', cors() , async (req, res) => {
+app.get('/aineg', async (req, res) => {
     const completion = await openai.createChatCompletion({
         model:'gpt-3.5-turbo',
         messages:[
@@ -52,7 +51,7 @@ app.get('/aineg', cors() , async (req, res) => {
     console.log(completion.data.choices[0].message)
 })
 
-app.get('/aipos', cors(), async (req, res) => {
+app.get('/aipos', async (req, res) => {
     const completion = await openai.createChatCompletion({
         model:'gpt-3.5-turbo',
         messages:[
