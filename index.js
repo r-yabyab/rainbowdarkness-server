@@ -22,7 +22,7 @@ const app = express()
     })
     const openai = new OpenAIApi(configuration)
     
-//middleware
+//middleware()
 app.use(cors());
 app.use(express.json())
 app.use((req, res, next) => {
