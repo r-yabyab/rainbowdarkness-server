@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const rateLimit = require('express-rate-limit')
+// const rateLimit = require('express-rate-limit')
 const { Configuration, OpenAIApi } = require('openai')
 // const path = require("path")
 const rainbowRoutes = require('./routes/rainbowRoutes')
@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 app.use('/api/rainbows', rainbowRoutes)
 
 
-app.get('/aineg', cors() ,apiLimiter, async (req, res) => {
+app.get('/aineg', cors() , async (req, res) => {
     const completion = await openai.createChatCompletion({
         model:'gpt-3.5-turbo',
         messages:[
@@ -52,7 +52,7 @@ app.get('/aineg', cors() ,apiLimiter, async (req, res) => {
     console.log(completion.data.choices[0].message)
 })
 
-app.get('/aipos', cors(), apiLimiter, async (req, res) => {
+app.get('/aipos', cors(), async (req, res) => {
     const completion = await openai.createChatCompletion({
         model:'gpt-3.5-turbo',
         messages:[
