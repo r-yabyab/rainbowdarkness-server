@@ -60,7 +60,7 @@ app.get('/aipos', apiLimiter, async (req, res) => {
             // {role:'user', content: `Can you give me 1 happiness question (higher than 0.5) from published psychology peer reviewed articles. Include inline citation in parenthesis after the question. Also make sure the question can be answered based on current day from 0-10, and can be repeated everyday. (IMPORTANT: GIVE ME ONLY THE QUESTION, CITATION, AND R VALUE IN ONE SENTENCE with only the full citation in the 2nd sentence and nothing else. These are scientific journals, please don't compromise their findings by making things up.)`},
             {role:'user', content: `Can you give me 1 happiness question (higher than 0.5) from published psychology peer reviewed articles. Include inline citation in parenthesis after the question. Also make sure the question can be answered based on current day from 0-10, and can be repeated everyday. (IMPORTANT: GIVE ME ONLY A ONE SENTENCE RESPONSE --THE QUESTION AND PARENTHETICAL CITATION(AUTHORS AND YEAR ONLY). These are scientific journals, please don't compromise their findings by making things up.)`},
         ],
-        temperature: 0.4,
+        temperature: 0.9,
         max_tokens: 256,
         top_p: 1,
         frequency_penalty: 0,
