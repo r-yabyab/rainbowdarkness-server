@@ -35,7 +35,7 @@ app.use((req, res, next) => {
 app.use('/api/rainbows', rainbowRoutes)
 
 
-app.get('/ai/neg', apiLimiter, async (req, res) => {
+app.get('/aineg', apiLimiter, async (req, res) => {
     const completion = await openai.createChatCompletion({
         model:'gpt-3.5-turbo',
         messages:[
@@ -52,7 +52,7 @@ app.get('/ai/neg', apiLimiter, async (req, res) => {
     console.log(completion.data.choices[0].message)
 })
 
-app.get('/ai/pos', apiLimiter, async (req, res) => {
+app.get('/aipos', apiLimiter, async (req, res) => {
     const completion = await openai.createChatCompletion({
         model:'gpt-3.5-turbo',
         messages:[
