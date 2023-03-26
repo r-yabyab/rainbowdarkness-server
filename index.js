@@ -4,23 +4,23 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 // const rateLimit = require('express-rate-limit')
-const { Configuration, OpenAIApi } = require('openai')
 // const path = require("path")
 const rainbowRoutes = require('./routes/rainbowRoutes')
+// const { Configuration, OpenAIApi } = require('openai')
 
 const app = express()
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_KEY,
-})
-const openai = new OpenAIApi(configuration)
+// const configuration = new Configuration({
+//     apiKey: process.env.OPENAI_KEY,
+// })
+// const openai = new OpenAIApi(configuration)
 
-const apiLimiter = rateLimit({
-    windowMs: 10000,
-    max: 5,
-    standardHeaders: true,
-    legacyHeaders: false,
-    store: new rateLimit.MemoryStore(),
-})
+// const apiLimiter = rateLimit({
+//     windowMs: 10000,
+//     max: 5,
+//     standardHeaders: true,
+//     legacyHeaders: false,
+//     store: new rateLimit.MemoryStore(),
+// })
 
 //middleware
 app.use(express.json())
