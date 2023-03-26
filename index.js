@@ -10,13 +10,13 @@ const { Configuration, OpenAIApi } = require('openai')
 
 const app = express()
 
-// const apiLimiter = rateLimit({
-    //     windowMs: 10000,
-    //     max: 5,
-    //     standardHeaders: true,
-    //     legacyHeaders: false,
-    //     store: new rateLimit.MemoryStore(),
-    // })
+const apiLimiter = rateLimit({
+        windowMs: 10000,
+        max: 5,
+        standardHeaders: true,
+        legacyHeaders: false,
+        store: new rateLimit.MemoryStore(),
+    })
     const configuration = new Configuration({
         apiKey: process.env.OPENAI_KEY,
     })
@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 app.use('/api/rainbows', rainbowRoutes)
 
 
-app.get('/aineg', async (req, res) => {
+app.get('/aineg', apiLimiter, async (req, res) => {
     const completion = await openai.createChatCompletion({
         model:'gpt-3.5-turbo',
         messages:[
@@ -51,7 +51,7 @@ app.get('/aineg', async (req, res) => {
     console.log(completion.data.choices[0].message)
 })
 
-app.get('/aipos', async (req, res) => {
+app.get('/aipos', apiLimiter, async (req, res) => {
     const completion = await openai.createChatCompletion({
         model:'gpt-3.5-turbo',
         messages:[
