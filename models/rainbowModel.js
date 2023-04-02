@@ -9,4 +9,14 @@ const rainbowSchema = new Schema ({
     }
 }, {timestamps: true})
 
-module.exports = mongoose.model("Rainbow", rainbowSchema)
+const rainbowMemoSchema = new Schema ({
+    memo: {
+        type: String,
+        required: true
+    }
+}, {timestamps: true})
+
+module.exports = {
+    Rainbow: mongoose.model("Rainbow", rainbowSchema),
+    RainbowMemo: mongoose.model("RainbowMemo", rainbowMemoSchema)
+}

@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
-const Rainbow = require('../models/rainbowModel')
+const {
+  Rainbow,
+  RainbowMemo
+} = require('../models/rainbowModel')
 
 const postRainbow = async (req, res) => {
     const {number} = req.body
@@ -13,6 +16,16 @@ const postRainbow = async (req, res) => {
 
 }
 
+const postRainbowMemo = async (req, res) => {
+  const {memo} = req.body
+
+  try {
+    const rainbow = await RainbowMemo.create({memo})
+    res.status(200).json(rainbow)
+  } catch (error) {
+    res.status(400).json({error: error.message})
+  }
+}
 
 //
 //
@@ -146,5 +159,6 @@ module.exports = {
     getSingleRainbow,
     getLast,
     getWeek,
-    getToday
+    getToday,
+    postRainbowMemo
 }
