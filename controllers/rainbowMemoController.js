@@ -30,7 +30,7 @@ const postRainbowMemo = async (req, res) => {
   }
 
   const getLastMemo = async (req, res) => {
-    const rainbowsLast = await Rainbow.aggregate([
+    const rainbowsLast = await RainbowMemo.aggregate([
       // created at -1 descending (most recent), limit for # of items
       {
         '$sort': {
