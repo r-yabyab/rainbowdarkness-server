@@ -19,7 +19,7 @@ const postRainbowMemo = async (req, res) => {
       return res.status(404).json({error: 'No such memo'})
     }
   
-    const rainbows = await Rainbow.findById(id)
+    const rainbows = await RainbowMemo.findById(id)
   
     if (!rainbows) {
       return res.status(404).json({error: "no such memo"})
