@@ -47,7 +47,7 @@ const jwtCheck = auth({
 //     })
 // })
 
-app.use('/api/memos', cors(), rainbowMemoRoutes)
+app.use('/api/memos', rainbowMemoRoutes)
 
 app.use('/api/rainbows', rainbowRoutes)
 
