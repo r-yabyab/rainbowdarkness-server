@@ -6,6 +6,8 @@ const cors = require('cors')
 const rateLimit = require('express-rate-limit')
 // const path = require("path")
 const rainbowRoutes = require('./routes/rainbowRoutes')
+const { auth } = require('express-oauth2-jwt-bearer')
+const guard = require('express-jwt-permissions')()
 const { Configuration, OpenAIApi } = require('openai')
 
 const app = express()
@@ -28,6 +30,20 @@ app.use(express.json())
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
+})
+
+const jwtCheck = auth({
+    audience: 'https://www.rainbowdarkness-api.com',
+    issuerBaseURL: 'https://dev-bxpbdydalm6tmklv.us.auth0.com/',
+    tokenSigningAlg: 'RS256'
+  });
+
+app.get('/memos', jwtCheck, guard.check(['read:memos']), function (req, res) {
+    res.send('Secured Resource')
+    res.json({ 
+        json1: 'This is the first json', 
+        json2: 'this is json2' 
+    })
 })
 
 
