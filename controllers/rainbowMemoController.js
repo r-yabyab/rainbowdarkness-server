@@ -12,4 +12,21 @@ const postRainbowMemo = async (req, res) => {
     }
   }
 
-module.exports = {postRainbowMemo}
+  const getSingleRainbowMemo = async (req, res) => {
+    const { id } = req.params
+  
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({error: 'No such memo'})
+    }
+  
+    const rainbows = await Rainbow.findById(id)
+  
+    if (!rainbows) {
+      return res.status(404).json({error: "no such memo"})
+    }
+  
+    res.status(200).json(rainbows)
+  
+  }
+
+module.exports = {postRainbowMemo, getSingleRainbowMemo}
