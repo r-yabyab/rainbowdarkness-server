@@ -6,7 +6,7 @@ const cors = require('cors')
 const rateLimit = require('express-rate-limit')
 // const path = require("path")
 const rainbowRoutes = require('./routes/rainbowRoutes')
-// const rainbowMemoRoutes = require('./routes/rainbowMemoRoutes')
+const rainbowMemoRoutes = require('./routes/rainbowMemoRoutes')
 const { auth } = require('express-oauth2-jwt-bearer')
 const guard = require('express-jwt-permissions')()
 const { Configuration, OpenAIApi } = require('openai')
@@ -47,7 +47,7 @@ const jwtCheck = auth({
 //     })
 // })
 
-// app.use('/api/memos', rainbowMemoRoutes)
+app.use('/api/memos', rainbowMemoRoutes)
 
 app.use('/api/rainbows', rainbowRoutes)
 
