@@ -29,4 +29,19 @@ const postRainbowMemo = async (req, res) => {
   
   }
 
-module.exports = {postRainbowMemo, getSingleRainbowMemo}
+  const getLastMemo = async (req, res) => {
+    const rainbowsLast = await Rainbow.aggregate([
+      // created at -1 descending (most recent), limit for # of items
+      {
+        '$sort': {
+          'createdAt': -1
+        }
+      }, 
+      // {
+      //   '$limit': 25
+      // }
+    ])
+    res.status(200).json(rainbowsLast)
+  }
+
+module.exports = {postRainbowMemo, getSingleRainbowMemo, getLastMemo}
