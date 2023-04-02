@@ -1,5 +1,5 @@
 const express = require('express')
-const {postRainbowMemo} = require('../controllers/rainbowController')
+const {postRainbowMemo} = require('../controllers/rainbowMemoController')
 const router = express.Router()
 
 
