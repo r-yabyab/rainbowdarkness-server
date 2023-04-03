@@ -49,9 +49,9 @@ app.use((req, res, next) => {
 //         json2: 'this is json2'
 //     })
 // })
-// app.use('/api/rainbows', rainbowRoutes)
+app.use('/api/rainbows',cors(), rainbowRoutes)
 
-// app.use('/api/memos', rainbowMemoRoutes)
+app.use('/api/memos',cors(), rainbowMemoRoutes)
 // app.use('/api/memos', jwtCheck, rainbowMemoRoutes)
 
 
