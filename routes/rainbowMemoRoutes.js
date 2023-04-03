@@ -1,7 +1,7 @@
 const express = require('express')
 const {postRainbowMemo, getSingleRainbowMemo, getLastMemo} = require('../controllers/rainbowMemoController')
 const rateLimit = require('express-rate-limit')
-const { checkJwt } = require('../middleware/auth')
+// const { checkJwt } = require('../middleware/auth')
 const router = express.Router()
 
 const apiLimiter = rateLimit({
@@ -12,8 +12,8 @@ const apiLimiter = rateLimit({
     store: new rateLimit.MemoryStore(),
 })
 
-router.post('/', checkJwt, apiLimiter, postRainbowMemo)
-// router.post('/', apiLimiter, postRainbowMemo)
+// router.post('/', checkJwt, apiLimiter, postRainbowMemo)
+router.post('/', apiLimiter, postRainbowMemo)
 router.get('/single/:id', getSingleRainbowMemo)
 router.get('/last', getLastMemo)
 
