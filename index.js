@@ -8,11 +8,9 @@ const rateLimit = require('express-rate-limit')
 const rainbowRoutes = require('./routes/rainbowRoutes')
 const rainbowMemoRoutes = require('./routes/rainbowMemoRoutes')
 
-const { auth } = require('express-oauth2-jwt-bearer')
-const jwt = require('express-jwt')
-const jwksRsa = require('jwks-rsa')
+// const { auth } = require('express-oauth2-jwt-bearer')
 
-const guard = require('express-jwt-permissions')()
+// const guard = require('express-jwt-permissions')()
 const { Configuration, OpenAIApi } = require('openai')
 
 const app = express()
@@ -37,11 +35,11 @@ app.use((req, res, next) => {
     next()
 })
 
-const jwtCheck = auth({
-    audience: 'https://www.rainbowdarkness-api.com',
-    issuerBaseURL: 'https://dev-bxpbdydalm6tmklv.us.auth0.com/',
-    // tokenSigningAlg: 'RS256'
-  });
+// const jwtCheck = auth({
+//     audience: 'https://www.rainbowdarkness-api.com',
+//     issuerBaseURL: 'https://dev-bxpbdydalm6tmklv.us.auth0.com/',
+//     // tokenSigningAlg: 'RS256'
+//   });
 
 // app.get('/memos', jwtCheck, guard.check(['read:memos']), function (req, res) {
 //     res.send('Secured Resource')
@@ -51,8 +49,8 @@ const jwtCheck = auth({
 //     })
 // })
 
-// app.use('/api/memos', rainbowMemoRoutes)
-app.use('/api/memos', jwtCheck, rainbowMemoRoutes)
+app.use('/api/memos', rainbowMemoRoutes)
+// app.use('/api/memos', jwtCheck, rainbowMemoRoutes)
 
 app.use('/api/rainbows', rainbowRoutes)
 
