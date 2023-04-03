@@ -12,8 +12,8 @@ const apiLimiter = rateLimit({
     store: new rateLimit.MemoryStore(),
 })
 
-// router.post('/', checkJwt, apiLimiter, postRainbowMemo)
-router.post('/', apiLimiter, postRainbowMemo)
+router.post('/', checkJwt, apiLimiter, postRainbowMemo)
+// router.post('/', apiLimiter, postRainbowMemo)
 router.get('/single/:id', getSingleRainbowMemo)
 router.get('/last', getLastMemo)
 
