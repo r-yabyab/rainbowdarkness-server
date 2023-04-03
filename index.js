@@ -32,9 +32,11 @@ const app = express()
 app.use(cors());
 app.use(express.json())
 app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
     console.log(req.path, req.method)
     next()
 })
+
 
 // const jwtCheck = auth({
 //     audience: 'https://www.rainbowdarkness-api.com',
