@@ -17,7 +17,7 @@ const app = express()
 
 const apiLimiter = rateLimit({
         windowMs: 10000,
-        max: 5,
+        max: 10,
         standardHeaders: true,
         legacyHeaders: false,
         store: new rateLimit.MemoryStore(),
