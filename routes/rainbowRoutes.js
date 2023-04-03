@@ -1,5 +1,6 @@
 const express = require("express")
 const rateLimit = require("express-rate-limit")
+const cors = require('cors')
 const {
     postRainbow,
     getAllRainbow,
@@ -19,6 +20,8 @@ const apiLimiter = rateLimit({
     legacyHeaders: false,
     store: new rateLimit.MemoryStore(),
 })
+
+router.use(cors())
 
 
 // post to DB
