@@ -12,6 +12,7 @@ const {
 
 const router = express.Router()
 
+router.use(cors())
 
 const apiLimiter = rateLimit({
     windowMs: 86400000, //24 hours is  86400000
@@ -21,7 +22,6 @@ const apiLimiter = rateLimit({
     store: new rateLimit.MemoryStore(),
 })
 
-router.use(cors())
 
 
 // post to DB
