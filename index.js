@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 app.use('/api/memos', rainbowMemoRoutes)
 // app.use('/api/memos', jwtCheck, rainbowMemoRoutes)
 
-app.use('/api/rainbows', rainbowRoutes)
+app.use('/api/rainbows', cors() , rainbowRoutes)
 
 
 app.get('/aineg', apiLimiter, async (req, res) => {
