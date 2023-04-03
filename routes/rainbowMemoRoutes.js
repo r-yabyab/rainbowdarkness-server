@@ -18,4 +18,4 @@ router.post('/', postRainbowMemo)
 router.get('/single/:id', getSingleRainbowMemo)
 router.get('/last', getLastMemo)
 
-// module.exports = router
+module.exports = router

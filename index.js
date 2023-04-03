@@ -6,7 +6,7 @@ const cors = require('cors')
 // const rateLimit = require('express-rate-limit')
 // const path = require("path")
 const rainbowRoutes = require('./routes/rainbowRoutes')
-// const rainbowMemoRoutes = require('./routes/rainbowMemoRoutes')
+const rainbowMemoRoutes = require('./routes/rainbowMemoRoutes')
 
 // const { auth } = require('express-oauth2-jwt-bearer')
 
@@ -30,7 +30,7 @@ const app = express()
 
 //middleware()
 app.use(cors({
-    origin: ['https://rainbowdarkness.com/', 'http://localhost:3000']
+    origin: ['https://rainbowdarknfdsfsdfsd', 'http://localhodsfsf']
 }));
 app.use(express.json())
 app.use((req, res, next) => {
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
 // })
 app.use('/api/rainbows', rainbowRoutes)
 
-// app.use('/api/memos', rainbowMemoRoutes)
+app.use('/api/memos', rainbowMemoRoutes)
 // app.use('/api/memos', jwtCheck, rainbowMemoRoutes)
 
 
