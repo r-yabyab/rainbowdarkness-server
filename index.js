@@ -7,7 +7,11 @@ const rateLimit = require('express-rate-limit')
 // const path = require("path")
 const rainbowRoutes = require('./routes/rainbowRoutes')
 const rainbowMemoRoutes = require('./routes/rainbowMemoRoutes')
+
 const { auth } = require('express-oauth2-jwt-bearer')
+const jwt = require('express-jwt')
+const jwksRsa = require('jwks-rsa')
+
 const guard = require('express-jwt-permissions')()
 const { Configuration, OpenAIApi } = require('openai')
 
