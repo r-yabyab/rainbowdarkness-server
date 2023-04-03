@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 // })
 app.use('/api/rainbows', rainbowRoutes)
 
-app.use('/api/memos', rainbowMemoRoutes)
+// app.use('/api/memos', rainbowMemoRoutes)
 // app.use('/api/memos', jwtCheck, rainbowMemoRoutes)
 
 
