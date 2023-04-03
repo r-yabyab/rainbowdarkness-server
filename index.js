@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 const jwtCheck = auth({
     audience: 'https://www.rainbowdarkness-api.com',
     issuerBaseURL: 'https://dev-bxpbdydalm6tmklv.us.auth0.com/',
-    tokenSigningAlg: 'RS256'
+    // tokenSigningAlg: 'RS256'
   });
 
 // app.get('/memos', jwtCheck, guard.check(['read:memos']), function (req, res) {
@@ -47,7 +47,8 @@ const jwtCheck = auth({
 //     })
 // })
 
-app.use('/api/memos', rainbowMemoRoutes)
+// app.use('/api/memos', rainbowMemoRoutes)
+app.use('/api/memos', jwtCheck, rainbowMemoRoutes)
 
 app.use('/api/rainbows', rainbowRoutes)
 
