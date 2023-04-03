@@ -29,9 +29,7 @@ const app = express()
 //     const openai = new OpenAIApi(configuration)
 
 //middleware()
-app.use(cors({
-    origin: ['https://rainbowdarknfdsfsdfsd', 'http://localhodsfsf']
-}));
+app.use(cors());
 app.use(express.json())
 app.use((req, res, next) => {
     console.log(req.path, req.method)
@@ -51,9 +49,9 @@ app.use((req, res, next) => {
 //         json2: 'this is json2'
 //     })
 // })
-app.use('/api/rainbows', rainbowRoutes)
+// app.use('/api/rainbows', rainbowRoutes)
 
-app.use('/api/memos', rainbowMemoRoutes)
+// app.use('/api/memos', rainbowMemoRoutes)
 // app.use('/api/memos', jwtCheck, rainbowMemoRoutes)
 
 
