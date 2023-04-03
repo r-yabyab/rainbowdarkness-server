@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const rateLimit = require('express-rate-limit')
+// const rateLimit = require('express-rate-limit')
 // const path = require("path")
 const rainbowRoutes = require('./routes/rainbowRoutes')
 const rainbowMemoRoutes = require('./routes/rainbowMemoRoutes')
@@ -15,17 +15,17 @@ const { Configuration, OpenAIApi } = require('openai')
 
 const app = express()
 
-const apiLimiter = rateLimit({
-        windowMs: 10000,
-        max: 10,
-        standardHeaders: true,
-        legacyHeaders: false,
-        store: new rateLimit.MemoryStore(),
-    })
-    const configuration = new Configuration({
-        apiKey: process.env.OPENAI_KEY,
-    })
-    const openai = new OpenAIApi(configuration)
+// const apiLimiter = rateLimit({
+//         windowMs: 10000,
+//         max: 10,
+//         standardHeaders: true,
+//         legacyHeaders: false,
+//         store: new rateLimit.MemoryStore(),
+//     })
+//     const configuration = new Configuration({
+//         apiKey: process.env.OPENAI_KEY,
+//     })
+//     const openai = new OpenAIApi(configuration)
     
 //middleware()
 app.use(cors());
@@ -55,41 +55,41 @@ app.use('/api/memos', rainbowMemoRoutes)
 app.use('/api/rainbows', cors() , rainbowRoutes)
 
 
-app.get('/aineg', cors(), apiLimiter, async (req, res) => {
-    const completion = await openai.createChatCompletion({
-        model:'gpt-3.5-turbo',
-        messages:[
-            {role:'system', content: `Don't make any comments, keep things accurate and factual.`},
-            // {role:'user', content: `Can you give me 1 negative question that is inversely correlated  with happiness (higher than -0.5) from published psychology peer reviewed articles. Include inline citation in parenthesis after the question. Also make sure the question can be answered based on current day from 0-10, and can be repeated everyday. (IMPORTANT: GIVE ME ONLY THE QUESTION, CITATION, AND R VALUE IN ONE SENTENCE with only the full citation in the 2nd sentence and nothing else. These are scientific journals, please don't compromise their findings by making things up.)`},
-            {role:'user', content: `Can you give me 1 negative question that is inversely correlated  with happiness (higher than -0.5) from published psychology peer reviewed articles. Include inline citation in parenthesis after the question. Also make sure the question can be answered based on current day from 0-10, and can be repeated everyday. (IMPORTANT: GIVE ME ONLY A ONE SENTENCE RESPONSE --THE QUESTION AND PARENTHETICAL CITATION(AUTHORS AND YEAR ONLY) . These are scientific journals, please don't compromise their findings by making things up.)`},
-        ],
-        temperature: 0.7,
-        max_tokens: 256,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-    })
-    res.send(completion.data.choices[0].message)
-    console.log(completion.data.choices[0].message)
-})
+// app.get('/aineg', cors(), apiLimiter, async (req, res) => {
+//     const completion = await openai.createChatCompletion({
+//         model:'gpt-3.5-turbo',
+//         messages:[
+//             {role:'system', content: `Don't make any comments, keep things accurate and factual.`},
+//             // {role:'user', content: `Can you give me 1 negative question that is inversely correlated  with happiness (higher than -0.5) from published psychology peer reviewed articles. Include inline citation in parenthesis after the question. Also make sure the question can be answered based on current day from 0-10, and can be repeated everyday. (IMPORTANT: GIVE ME ONLY THE QUESTION, CITATION, AND R VALUE IN ONE SENTENCE with only the full citation in the 2nd sentence and nothing else. These are scientific journals, please don't compromise their findings by making things up.)`},
+//             {role:'user', content: `Can you give me 1 negative question that is inversely correlated  with happiness (higher than -0.5) from published psychology peer reviewed articles. Include inline citation in parenthesis after the question. Also make sure the question can be answered based on current day from 0-10, and can be repeated everyday. (IMPORTANT: GIVE ME ONLY A ONE SENTENCE RESPONSE --THE QUESTION AND PARENTHETICAL CITATION(AUTHORS AND YEAR ONLY) . These are scientific journals, please don't compromise their findings by making things up.)`},
+//         ],
+//         temperature: 0.7,
+//         max_tokens: 256,
+//         top_p: 1,
+//         frequency_penalty: 0,
+//         presence_penalty: 0,
+//     })
+//     res.send(completion.data.choices[0].message)
+//     console.log(completion.data.choices[0].message)
+// })
 
-app.get('/aipos', cors(), apiLimiter, async (req, res) => {
-    const completion = await openai.createChatCompletion({
-        model:'gpt-3.5-turbo',
-        messages:[
-            {role:'system', content: `Don't make any comments, keep things accurate and factual.`},
-            // {role:'user', content: `Can you give me 1 happiness question (higher than 0.5) from published psychology peer reviewed articles. Include inline citation in parenthesis after the question. Also make sure the question can be answered based on current day from 0-10, and can be repeated everyday. (IMPORTANT: GIVE ME ONLY THE QUESTION, CITATION, AND R VALUE IN ONE SENTENCE with only the full citation in the 2nd sentence and nothing else. These are scientific journals, please don't compromise their findings by making things up.)`},
-            {role:'user', content: `Can you give me 1 happiness question (higher than 0.5) from published psychology peer reviewed articles. Include inline citation in parenthesis after the question. Also make sure the question can be answered based on current day from 0-10, and can be repeated everyday. (IMPORTANT: GIVE ME ONLY A ONE SENTENCE RESPONSE --THE QUESTION AND PARENTHETICAL CITATION(AUTHORS AND YEAR ONLY). These are scientific journals, please don't compromise their findings by making things up.)`},
-        ],
-        temperature: 0.9,
-        max_tokens: 256,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-    })
-    res.send(completion.data.choices[0].message)
-    console.log(completion.data.choices[0].message)
-})
+// app.get('/aipos', cors(), apiLimiter, async (req, res) => {
+//     const completion = await openai.createChatCompletion({
+//         model:'gpt-3.5-turbo',
+//         messages:[
+//             {role:'system', content: `Don't make any comments, keep things accurate and factual.`},
+//             // {role:'user', content: `Can you give me 1 happiness question (higher than 0.5) from published psychology peer reviewed articles. Include inline citation in parenthesis after the question. Also make sure the question can be answered based on current day from 0-10, and can be repeated everyday. (IMPORTANT: GIVE ME ONLY THE QUESTION, CITATION, AND R VALUE IN ONE SENTENCE with only the full citation in the 2nd sentence and nothing else. These are scientific journals, please don't compromise their findings by making things up.)`},
+//             {role:'user', content: `Can you give me 1 happiness question (higher than 0.5) from published psychology peer reviewed articles. Include inline citation in parenthesis after the question. Also make sure the question can be answered based on current day from 0-10, and can be repeated everyday. (IMPORTANT: GIVE ME ONLY A ONE SENTENCE RESPONSE --THE QUESTION AND PARENTHETICAL CITATION(AUTHORS AND YEAR ONLY). These are scientific journals, please don't compromise their findings by making things up.)`},
+//         ],
+//         temperature: 0.9,
+//         max_tokens: 256,
+//         top_p: 1,
+//         frequency_penalty: 0,
+//         presence_penalty: 0,
+//     })
+//     res.send(completion.data.choices[0].message)
+//     console.log(completion.data.choices[0].message)
+// })
 
 
 mongoose.connect(process.env.MONG_URI)
