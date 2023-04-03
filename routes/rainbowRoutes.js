@@ -38,14 +38,14 @@ router.post('/', apiLimiter, postRainbow)
 // get total submissions + average
 router.get('/', apiLimiter2, getAllRainbow)
 
-router.get('/single/:id', getSingleRainbow)
+router.get('/single/:id', apiLimiter2, getSingleRainbow)
 
 //get all from most recent
-router.get('/last', getLast)
+router.get('/last', apiLimiter2, getLast)
 
 router.get('/week', apiLimiter2, getWeek)
 
-router.get('/today', getToday)
+router.get('/today', apiLimiter2, getToday)
 
 
 // router.get('/', getLatestRainbow)
