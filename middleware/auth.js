@@ -2,8 +2,8 @@ const jwt = require('express-jwt')
 const jwks = require('jwks-rsa')
 
 const authConfig = {
-    domain: '',
-    audience: '',
+    domain: 'dev-bxpbdydalm6tmklv.us.auth0.com',
+    audience: 'data-relig',
 }
 
 const checkJwt = jwt({
