@@ -6,7 +6,7 @@ const cors = require('cors')
 // const rateLimit = require('express-rate-limit')
 // const path = require("path")
 const rainbowRoutes = require('./routes/rainbowRoutes')
-const rainbowMemoRoutes = require('./routes/rainbowMemoRoutes')
+// const rainbowMemoRoutes = require('./routes/rainbowMemoRoutes')
 
 // const { auth } = require('express-oauth2-jwt-bearer')
 
@@ -26,7 +26,7 @@ const app = express()
 //         apiKey: process.env.OPENAI_KEY,
 //     })
 //     const openai = new OpenAIApi(configuration)
-    
+
 //middleware()
 app.use(cors());
 app.use(express.json())
@@ -43,9 +43,9 @@ app.use((req, res, next) => {
 
 // app.get('/memos', jwtCheck, guard.check(['read:memos']), function (req, res) {
 //     res.send('Secured Resource')
-//     res.json({ 
-//         json1: 'This is the first json', 
-//         json2: 'this is json2' 
+//     res.json({
+//         json1: 'This is the first json',
+//         json2: 'this is json2'
 //     })
 // })
 app.use('/api/rainbows', rainbowRoutes)
