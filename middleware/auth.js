@@ -7,7 +7,7 @@ const authConfig = {
 }
 
 const checkJwt = jwt({
-    secret:jwks.expressJwtSecret({
+    secret: jwks.expressJwtSecret({
         cache: true,
         rateLimit: true,
         jwksRequestsPerMinute: 5,
@@ -19,4 +19,4 @@ const checkJwt = jwt({
     algorithms: ['RS256']
 })
 
-module.exports = {checkJwt};
+// module.exports = {checkJwt};
