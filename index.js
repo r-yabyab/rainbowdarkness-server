@@ -3,11 +3,10 @@ require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
-// const rateLimit = require('express-rate-limit')
-// const path = require("path")
 const rainbowRoutes = require('./routes/rainbowRoutes')
 const rainbowMemoRoutes = require('./routes/rainbowMemoRoutes')
-
+// const rateLimit = require('express-rate-limit')
+// const path = require("path")
 // const { auth } = require('express-oauth2-jwt-bearer')
 
 // const guard = require('express-jwt-permissions')()
@@ -31,8 +30,12 @@ const app = express()
 //middleware()
 app.use(cors());
 app.use(express.json())
+
+let count = 0
+
 app.use((req, res, next) => {
-    console.log(req.path, req.method)
+    console.log(req.path, req.method, count)
+    count++
     next()
 })
 
@@ -92,23 +95,17 @@ app.use('/api/memos', rainbowMemoRoutes)
 //     console.log(completion.data.choices[0].message)
 // })
 
+const port = process.env.PORT || 3000;
 
 mongoose.connect(process.env.MONG_URI)
     .then(() => {
-        app.listen(process.env.PORT, () => {
-            console.log('connected to db & listening on port', process.env.PORT)
+        app.listen(port, () => {
+            console.log('connected to db & listening on port', port)
         })
     })
     .catch((error) => {
         console.log(error)
     })
-
-//      heroku sucks, don't use
-// if running on heroku (node.env), then fire code
-// if (process.env.NODE_ENV === 'production') {
-//     app.use(express.static('../client/build'))
-// }
-
 
 
 // app.listen(process.env.PORT, () => {
