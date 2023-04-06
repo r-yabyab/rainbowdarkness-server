@@ -13,3 +13,29 @@ const postRainbowMemo = async (req, res) => {
     res.status(400).json({error: error.message})
   }
 }
+
+
+
+
+
+  ./vercel.json
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "*.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/",
+        "headers": {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
+          "Access-Control-Allow-Headers": "Content-Type"
+        }
+      }
+    ]
+  }
