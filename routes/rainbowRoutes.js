@@ -22,7 +22,7 @@ const apiLimiter = rateLimit({
 const apiLimiter2 = rateLimit({
     windowMs: 10000, //10 secs
     // windowMs: 100000, //10 secs
-    max: 20,
+    max: 200,
     standardHeaders: true,
     legacyHeaders: false,
     store: new rateLimit.MemoryStore(),
