@@ -81,13 +81,13 @@ startOfWeek.setHours(0, 0, 0, 0);
 const getWeek = async (req, res) => {
  const rainbowWeek = await Rainbow.aggregate([
   {
-    $match: {
-      createdAt: { $gte: startOfWeek }
+    '$match': {
+      'createdAt': { $gte: startOfWeek }
     }
   },
   {
-    $sort: {
-      createdAt: 1
+    '$sort': {
+      'createdAt': 1
     }
   }
 ])
@@ -101,15 +101,15 @@ const getToday = async (req, res) => {
   const rainbowToday = await Rainbow.aggregate([
   {
     $match: {
-      createdAt: {
-        $gte: today,
-        $lt: new Date(today.getTime() + 24 * 60 * 60 * 1000)
+      'createdAt': {
+        '$gte': today,
+        '$lt': new Date(today.getTime() + 24 * 60 * 60 * 1000)
       }
     }
   },
   {
-    $sort: {
-      createdAt: 1
+    '$sort': {
+      'createdAt': 1
     }
   }
 ])
