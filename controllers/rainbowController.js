@@ -18,7 +18,8 @@ const postRainbow = async (req, res) => {
 
     try {
         // const rainbow = await Rainbow.create({number})
-        const rainbow = await Rainbow.save({number})
+        // const rainbow = await Rainbow.save({number})
+        const rainbow = await newRainbow.save()
         res.status(200).json(rainbow)
     } catch (error) {
         res.status(400).json({error: error.message})
