@@ -5,7 +5,8 @@ const postRainbow = async (req, res) => {
     const {number} = req.body
 
     try {
-        const rainbow = await Rainbow.create({number})
+        // const rainbow = await Rainbow.create({number})
+        const rainbow = await Rainbow.save({number})
         res.status(200).json(rainbow)
     } catch (error) {
         res.status(400).json({error: error.message})

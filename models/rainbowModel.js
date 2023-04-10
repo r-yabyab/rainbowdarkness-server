@@ -6,14 +6,11 @@ const rainbowSchema = new Schema ({
     number: {
         type: Number,
         required: true
+    },
+    userID: {
+        type: String
     }
 }, {timestamps: true})
 
-// const rainbowMemoSchema = new Schema ({
-//     memo: {
-//         type: String,
-//         required: true
-//     }
-// }, {timestamps: true}) //
 
 module.exports = mongoose.model("Rainbow", rainbowSchema)
