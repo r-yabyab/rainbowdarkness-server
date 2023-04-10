@@ -15,7 +15,7 @@ const checkJwt = jwt({
     }),
 
     audience: authConfig.audience,
-    issuer: `https://${authConfig.domain}/`,
+    issuer: `https://dev-bxpbdydalm6tmklv.us.auth0.com/`,
     algorithms: ['RS256']
 })
 
