@@ -2,12 +2,14 @@ const express = require("express")
 const rateLimit = require("express-rate-limit")
 const {
     postRainbow,
+    postRainbowUser,
     getAllRainbow,
     getSingleRainbow,
     getLast,
     getWeek,
     getToday
 } = require('../controllers/rainbowController')
+const checkJwt = require("../middleware/auth")
 
 const router = express.Router()
 
@@ -31,7 +33,8 @@ const apiLimiter2 = rateLimit({
 
 
 // post to DB
-router.post('/', apiLimiter, postRainbow)
+router.post('/postnum', apiLimiter, postRainbow)
+router.post('/postnumuser', checkJwt, postRainbowUser)
 // router.post('/', postRainbow)
 
     // fetch from DB

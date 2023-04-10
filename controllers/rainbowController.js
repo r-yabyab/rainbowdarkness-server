@@ -1,7 +1,19 @@
 const mongoose = require('mongoose')
 const Rainbow = require('../models/rainbowModel')
+// const checkJwt = require('../middleware/auth')
 
 const postRainbow = async (req, res) => {
+  const {number} = req.body
+
+  try {
+      const rainbow = await Rainbow.create({number})
+      res.status(200).json(rainbow)
+  } catch (error) {
+      res.status(400).json({error: error.message})
+  }
+}
+
+const postRainbowUser = async (req, res) => {
     const {number} = req.body
     let newRainbow
 
@@ -26,6 +38,8 @@ const postRainbow = async (req, res) => {
     }
 
 }
+
+
 
 
 //
@@ -156,6 +170,7 @@ res.status(200).json(rainbowToday)
 
 module.exports = {
     postRainbow,
+    postRainbowUser,
     getAllRainbow,
     getSingleRainbow,
     getLast,
