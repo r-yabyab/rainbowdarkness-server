@@ -3,6 +3,18 @@ const Rainbow = require('../models/rainbowModel')
 
 const postRainbow = async (req, res) => {
     const {number} = req.body
+    let newRainbow
+
+    if (req.user) {
+      newRainbow = new Rainbow({
+        number,
+        userID: req.user.sub
+      })
+    } else {
+      newRainbow = new Rainbow({
+        number
+      })
+    }
 
     try {
         // const rainbow = await Rainbow.create({number})
