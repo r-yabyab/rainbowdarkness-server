@@ -6,10 +6,11 @@ const {
     getAllRainbow,
     getSingleRainbow,
     getLast,
+    getLastNumUser,
     getWeek,
     getToday
 } = require('../controllers/rainbowController')
-const checkJwt = require("../middleware/auth")
+// const checkJwt = require("../middleware/auth")
 
 const router = express.Router()
 
@@ -24,7 +25,7 @@ const apiLimiter = rateLimit({
 const apiLimiter2 = rateLimit({
     windowMs: 10000, //10 secs
     // windowMs: 100000, //10 secs
-    max: 200,
+    max: 20,
     standardHeaders: true,
     legacyHeaders: false,
     store: new rateLimit.MemoryStore(),
@@ -34,7 +35,7 @@ const apiLimiter2 = rateLimit({
 
 // post to DB
 router.post('/postnum', apiLimiter, postRainbow)
-router.post('/postnumuser', checkJwt, postRainbowUser)
+router.post('/postnumuser', apiLimiter, postRainbowUser)
 // router.post('/', postRainbow)
 
     // fetch from DB
@@ -45,6 +46,8 @@ router.get('/single/:id', apiLimiter2, getSingleRainbow)
 
 //get all from most recent
 router.get('/last', apiLimiter2, getLast)
+
+router.get('/lastnumuser', apiLimiter2, getLastNumUser)
 
 router.get('/week', apiLimiter2, getWeek)
 

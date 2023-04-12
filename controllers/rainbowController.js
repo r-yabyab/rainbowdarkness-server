@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const Rainbow = require('../models/rainbowModel')
 // const checkJwt = require('../middleware/auth')
+// const jwt = require('jsonwebtoken')
+// const secret = process.env.JWT_SECRET
 
 const postRainbow = async (req, res) => {
   const {number} = req.body
@@ -13,30 +15,23 @@ const postRainbow = async (req, res) => {
   }
 }
 
+// includes auth0 user.sub when posting number
 const postRainbowUser = async (req, res) => {
     const {number} = req.body
-    let newRainbow
-
-    if (req.user) {
-      newRainbow = new Rainbow({
-        number,
-        userID: req.user.sub
-      })
-    } else {
-      newRainbow = new Rainbow({
-        number
-      })
-    }
+    const {sub} = req.query
+    console.log(req.query)
 
     try {
-        // const rainbow = await Rainbow.create({number})
+        const rainbow = await Rainbow.create({
+          number,
+          userID: sub
+        })
         // const rainbow = await Rainbow.save({number})
-        const rainbow = await newRainbow.save()
+        // const rainbow = await newRainbow.save()
         res.status(200).json(rainbow)
     } catch (error) {
         res.status(400).json({error: error.message})
     }
-
 }
 
 
@@ -100,6 +95,30 @@ const getLast = async (req, res) => {
   res.status(200).json(rainbowsLast)
 }
 
+// gets all of users nums, for matching with last
+const getLastNumUser = async (req, res) => {
+  const { sub } = req.query
+  
+  if (sub) {
+  const rainbowsLastNumUser = await Rainbow.aggregate([
+    {
+      '$match': {
+        'userID': sub
+      }
+    },
+    // sort by created at -1 descending (most recent), limit for # of items
+    {
+      '$sort': {
+        'createdAt': -1
+      }
+    }
+  ])
+  res.status(200).json(rainbowsLastNumUser)
+  console.log(rainbowsLastNumUser)
+  } else {
+    console.log('not found')
+  }
+}
 
 
 const startOfWeek = new Date();
@@ -174,6 +193,7 @@ module.exports = {
     getAllRainbow,
     getSingleRainbow,
     getLast,
+    getLastNumUser,
     getWeek,
     getToday
 }
