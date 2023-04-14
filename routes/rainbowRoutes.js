@@ -16,7 +16,7 @@ const router = express.Router()
 
 const apiLimiter = rateLimit({
     windowMs: 86400000, //24 hours is  86400000
-    max: 10,
+    max: 4,
     standardHeaders: true,
     legacyHeaders: false,
     store: new rateLimit.MemoryStore(),
