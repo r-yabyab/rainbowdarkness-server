@@ -42,11 +42,13 @@ router.post('/postnumuser', apiLimiter, postRainbowUser)
 // get total submissions + average
 router.get('/', apiLimiter2, getAllRainbow)
 
+// get single, currently not in use
 router.get('/single/:id', apiLimiter2, getSingleRainbow)
 
 //get all from most recent
 router.get('/last', apiLimiter2, getLast)
 
+//get user's numbers and all the other fields
 router.get('/lastnumuser', apiLimiter2, getLastNumUser)
 
 router.get('/week', apiLimiter2, getWeek)
