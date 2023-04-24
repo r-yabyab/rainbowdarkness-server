@@ -77,7 +77,31 @@ const getSingleRainbow = async (req, res) => {
   }
 
   res.status(200).json(rainbows)
+}
 
+// if user has account, this allows them to claim their number with their user.sub
+const putRainbowUserNum = async (req, res) => {
+  const id = req.query.id
+  const sub = req.query.sub
+  console.log('req.query:' + req.query.id)
+
+  // const id = `ObjectID('${id1}')`
+  console.log('id:' + id)
+  console.log('sub:' + sub)
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such number ++++++'})
+  }
+
+  const putRainbow = await Rainbow.findOneAndUpdate({ _id: id}, {
+    userID: sub
+  })
+
+  if(!Rainbow) {
+    return res.status(400).json({error: 'No such number ----'})
+  }
+
+  res.status(200).json(putRainbow)
 }
 
 const getLast = async (req, res) => {
@@ -195,5 +219,6 @@ module.exports = {
     getLast,
     getLastNumUser,
     getWeek,
-    getToday
+    getToday,
+    putRainbowUserNum
 }
