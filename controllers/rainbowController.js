@@ -46,6 +46,7 @@ const postRainbowUser = async (req, res) => {
 //     res.status(200).json(rainbows)
 // }
 
+// returns total and avg mood
 const getAllRainbow = async (req, res) => {    
   const rainbows = await Rainbow.aggregate([
     {
@@ -63,6 +64,7 @@ const getAllRainbow = async (req, res) => {
   res.status(200).json(rainbows)
 }
 
+// for debugging, not used in prod
 const getSingleRainbow = async (req, res) => {
   const { id } = req.params
 
@@ -144,7 +146,7 @@ const getLastNumUser = async (req, res) => {
   }
 }
 
-
+// adds date context after mongoDB pipelines fire
 const startOfWeek = new Date();
 startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
 startOfWeek.setHours(0, 0, 0, 0);
