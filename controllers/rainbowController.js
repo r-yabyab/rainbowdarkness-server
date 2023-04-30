@@ -19,7 +19,7 @@ const postRainbow = async (req, res) => {
 const postRainbowUser = async (req, res) => {
     const {number} = req.body
     const {sub} = req.query
-    console.log(req.query)
+    // console.log(req.query)
 
     try {
         const rainbow = await Rainbow.create({
@@ -85,11 +85,11 @@ const getSingleRainbow = async (req, res) => {
 const putRainbowUserNum = async (req, res) => {
   const id = req.query.id
   const sub = req.query.sub
-  console.log('req.query:' + req.query.id)
+  // console.log('req.query:' + req.query.id)
 
   // const id = `ObjectID('${id1}')`
-  console.log('id:' + id)
-  console.log('sub:' + sub)
+  // console.log('id:' + id)
+  // console.log('sub:' + sub)
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({error: 'No such number ++++++'})
@@ -140,7 +140,7 @@ const getLastNumUser = async (req, res) => {
     }
   ])
   res.status(200).json(rainbowsLastNumUser)
-  console.log(rainbowsLastNumUser)
+  // console.log(rainbowsLastNumUser)
   } else {
     console.log('not found')
   }

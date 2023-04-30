@@ -69,9 +69,9 @@ app.get('/aicomment', cors(), apiLimiter, async (req, res) => {
         presence_penalty: 0,
     })
     res.send(completion.data.choices[0].message)
-    console.log(completion.data.choices[0].message)
-    console.log(todayNumber + "today number")
-    console.log(yesterdayNumber + "yesterday number")
+    // console.log(completion.data.choices[0].message)
+    // console.log(todayNumber + "today number")
+    // console.log(yesterdayNumber + "yesterday number")
 })
 
 const port = process.env.PORT || 3000;
