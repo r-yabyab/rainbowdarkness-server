@@ -31,6 +31,7 @@ app.use(express.json())
 let count = 0
 
 app.use((req, res, next) => {
+    // this is not needed, tried to vercel but didn't work
     // res.setHeader("Access-Control-Allow-Origin", "*");
     console.log(req.path, req.method, count)
     count++
