@@ -31,7 +31,7 @@ app.use(express.json())
 let count = 0
 
 app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
+    // res.setHeader("Access-Control-Allow-Origin", "*");
     console.log(req.path, req.method, count)
     count++
     next()
