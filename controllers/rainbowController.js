@@ -167,16 +167,19 @@ const getWeek = async (req, res) => {
 res.status(200).json(rainbowWeek)
 }
 
+
 const today = new Date();
-today.setHours(0, 0, 0, 0);
+const startOfDay = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate(), 0, 0, 0));
+const endOfDay = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate(), 23, 59, 59));
 
 const getToday = async (req, res) => {
+
   const rainbowToday = await Rainbow.aggregate([
   {
     $match: {
       'createdAt': {
-        '$gte': today,
-        '$lt': new Date(today.getTime() + 24 * 60 * 60 * 1000)
+        '$gte': startOfDay,
+        '$lt': endOfDay
       }
     }
   },
@@ -187,6 +190,8 @@ const getToday = async (req, res) => {
   }
 ])
 res.status(200).json(rainbowToday)
+console.log(startOfDay + "startofDay")
+console.log(endOfDay + 'endofDay')
 }
 
 // const getLatestRainbow = async (req, res) => {
