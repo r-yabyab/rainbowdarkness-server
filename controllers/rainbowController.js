@@ -103,9 +103,12 @@ const putRainbowUserNum = async (req, res) => {
 }
 
 
-const putRainbowMemo = async (req, res) => {
+const putRainbowDetails = async (req, res) => {
   const sub = req.query.sub
   const id = req.query.id
+  const sleepNumber = req.query.sleepNumber
+  const activities = req.query.activities
+  const memoText = req.query.memoText
 
   if (!mongoose.Types.ObjectId.isValud(id)) {
     return res.status(404).json({error: 'no such number in db'})
@@ -113,7 +116,9 @@ const putRainbowMemo = async (req, res) => {
 
   const putRainbowMemo = await Rainbow.findOneAndUpdate({ _id: id}, {
     userID: sub,
-    memo: userMemo
+    timeSlept: sleepNumber,
+    activities: activities,
+    memo: memoText
   })
   if (!Rainbow) {
     return res.status(400).json({error: 'no such number in db'})
@@ -248,5 +253,5 @@ module.exports = {
     getWeek,
     getToday,
     putRainbowUserNum,
-    putRainbowMemo
+    putRainbowDetails
 }
