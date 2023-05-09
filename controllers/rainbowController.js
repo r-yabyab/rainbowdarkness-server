@@ -86,11 +86,6 @@ const getSingleRainbow = async (req, res) => {
 const putRainbowUserNum = async (req, res) => {
   const id = req.query.id
   const sub = req.query.sub
-  // console.log('req.query:' + req.query.id)
-
-  // const id = `ObjectID('${id1}')`
-  // console.log('id:' + id)
-  // console.log('sub:' + sub)
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({error: 'No such number ++++++'})
@@ -106,6 +101,30 @@ const putRainbowUserNum = async (req, res) => {
 
   res.status(200).json(putRainbow)
 }
+
+
+const putRainbowMemo = async (req, res) => {
+  const sub = req.query.sub
+  const id = req.query.id
+
+  if (!mongoose.Types.ObjectId.isValud(id)) {
+    return res.status(404).json({error: 'no such number in db'})
+  }
+
+  const putRainbowMemo = await Rainbow.findOneAndUpdate({ _id: id}, {
+    userID: sub,
+    memo: userMemo
+  })
+  if (!Rainbow) {
+    return res.status(400).json({error: 'no such number in db'})
+
+  }
+  res.status(200).json(putRainbowMemo)
+
+}
+
+
+
 
 const getLast = async (req, res) => {
   const rainbowsLast = await Rainbow.aggregate([
@@ -228,5 +247,6 @@ module.exports = {
     getLastNumUser,
     getWeek,
     getToday,
-    putRainbowUserNum
+    putRainbowUserNum,
+    putRainbowMemo
 }

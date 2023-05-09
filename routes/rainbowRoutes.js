@@ -9,7 +9,8 @@ const {
     getLastNumUser,
     getWeek,
     getToday,
-    putRainbowUserNum
+    putRainbowUserNum,
+    putRainbowMemo
 } = require('../controllers/rainbowController')
 // const checkJwt = require("../middleware/auth")
 
@@ -40,6 +41,8 @@ router.post('/postnumuser', apiLimiter, postRainbowUser)
 // router.post('/', postRainbow)
 
 router.patch('/:id', putRainbowUserNum)
+
+router.patch('/:id', putRainbowMemo)
 
     // fetch from DB
 // get total submissions + average

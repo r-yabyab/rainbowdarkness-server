@@ -11,7 +11,16 @@ const rainbowSchema = new Schema ({
     },
     userID: {
         type: String
-    }
+    },
+    timeSlept: {
+        type: Number
+    },
+    activities: {
+        type: String
+    },
+    memo: {
+        type: String
+    },
 }, {timestamps: true})
 
 
