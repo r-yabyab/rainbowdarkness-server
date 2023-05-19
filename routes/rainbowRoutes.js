@@ -10,7 +10,8 @@ const {
     getWeek,
     getToday,
     putRainbowUserNum,
-    putRainbowDetails
+    putRainbowDetails,
+    deleteRainbowDetails
 } = require('../controllers/rainbowController')
 // const checkJwt = require("../middleware/auth")
 
@@ -33,6 +34,15 @@ const apiLimiter2 = rateLimit({
     store: new rateLimit.MemoryStore(),
 })
 
+const apiEditLimiter = rateLimit({
+    windowMs: 10000, //10 secs
+    // windowMs: 100000, //10 secs
+    max: 8,
+    standardHeaders: true,
+    legacyHeaders: false,
+    store: new rateLimit.MemoryStore(),
+})
+
 
 
 // post to DB
@@ -42,7 +52,9 @@ router.post('/postnumuser', apiLimiter, postRainbowUser)
 
 router.patch('/:id', putRainbowUserNum)
 
-router.patch('/:id', putRainbowDetails)
+router.patch('/details/:id', putRainbowDetails)
+
+router.patch('/details/removefield/:id', apiEditLimiter, deleteRainbowDetails)
 
     // fetch from DB
 // get total submissions + average

@@ -104,28 +104,86 @@ const putRainbowUserNum = async (req, res) => {
 
 
 const putRainbowDetails = async (req, res) => {
-  const sub = req.query.sub
+  // const sub = req.query.sub
   const id = req.query.id
   const sleepNumber = req.query.sleepNumber
   const activities = req.query.activities
   const memoText = req.query.memoText
+  const moodNumber = req.query.moodNumber
 
-  if (!mongoose.Types.ObjectId.isValud(id)) {
+  console.log(req.query.sleepNumber)
+    // console.log('req.query:' + req.query.id)
+
+  // const id = `ObjectID('${id1}')`
+  // console.log('id:' + id)
+  // console.log('sub:' + sub)
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({error: 'no such number in db'})
   }
 
-  const putRainbowMemo = await Rainbow.findOneAndUpdate({ _id: id}, {
-    userID: sub,
-    timeSlept: sleepNumber,
-    activities: activities,
-    memo: memoText
-  })
+  const updateFields = {}
+
+  if (sleepNumber !== '') {
+    updateFields.timeSlept = sleepNumber
+  }
+
+  if (activities !== '') {
+    updateFields.activities = activities
+  }
+
+  if (memoText !== '') {
+    updateFields.memo = memoText
+  }
+
+  if (moodNumber !== '') {
+    updateFields.number = moodNumber
+  }
+
+  // const putRainbowMemo = await Rainbow.findOneAndUpdate({ _id: id}, {
+  //   // userID: sub,
+  //   timeSlept: sleepNumber,
+  //   activities: activities,
+  //   memo: memoText
+  // })
+
+  const putRainbowMemo = await Rainbow.findOneAndUpdate({ _id: id }, updateFields)
   if (!Rainbow) {
     return res.status(400).json({error: 'no such number in db'})
 
   }
   res.status(200).json(putRainbowMemo)
 
+}
+
+const deleteRainbowDetails = async (req, res) => {
+  const id = req.query.id
+  const fieldToDelete = req.query.fieldToDelete
+
+  console.log('fieldToDelete:', fieldToDelete)
+  console.log('id:', id)
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: 'No such number in the database' })
+  }
+
+  const updateFields = { $unset: {} }
+  updateFields.$unset[fieldToDelete] = 1
+
+  try {
+  const putRainbowMemo = await Rainbow.findOneAndUpdate({ _id: id }, updateFields, { new: true })
+  
+  if (!putRainbowMemo) {
+    return res.status(400).json({ error: 'No such number in the database' })
+  }
+
+  res.status(200).json(putRainbowMemo)
+  } catch (error) {
+    if (error.code === 429) {
+      return res.status(429).json({ error: 'Too Many Requests' })
+    }
+    return res.status(500).json({ error: 'Internal Server Error' })
+  }
 }
 
 
@@ -253,5 +311,6 @@ module.exports = {
     getWeek,
     getToday,
     putRainbowUserNum,
-    putRainbowDetails
+    putRainbowDetails,
+    deleteRainbowDetails
 }
