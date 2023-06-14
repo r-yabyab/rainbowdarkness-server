@@ -29,7 +29,7 @@ pipeline {
             stage('Push') {
 
                 steps {
-                    sh 'docker push cayabyabrr/rainbowserver:latest'
+                    sh 'docker push cayabyabrr/rainbowdarkness-server:latest'
                 }
             }
     }
