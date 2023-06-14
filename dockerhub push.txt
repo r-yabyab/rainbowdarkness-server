@@ -9,13 +9,13 @@ pipeline {
 
             stage('gitclone') {
                 steps {
-                    git 'https://github.com/r-yabyab/rainbowdarkness-server.git'
+                    git branch: 'main', url: 'https://github.com/r-yabyab/rainbowdarkness-server.git'
                 }
             }
 
             stage('Build') {
                 steps {
-                    sh 'docker build -t cayabyabrr/rainbowserver:latest .'
+                    sh 'docker build -t cayabyabrr/rainbowdarkness-server:latest .'
                 }
             }
 
