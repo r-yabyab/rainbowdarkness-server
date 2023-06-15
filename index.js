@@ -2,8 +2,8 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
-const AWS = require('aws-sdk')
-AWS.config.region = 'us-west-2b';
+// const AWS = require('aws-sdk')
+// AWS.config.region = 'us-west-2b';
 const cors = require('cors')
 const rainbowRoutes = require('./routes/rainbowRoutes')
 const rainbowMemoRoutes = require('./routes/rainbowMemoRoutes')
