@@ -1,5 +1,7 @@
 FROM node:bullseye
 
+RUN apt-get update && apt-get install -y awscli
+
 WORKDIR /app
 
 COPY package.json .
