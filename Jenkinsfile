@@ -1,12 +1,15 @@
 pipeline {
+    // need to config Jenkins settings to get this part running
     agent {label 'linux'}
 
+    // credentials in Jenkins setting (name, user, pw)
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
     }
 
     stages {
 
+            // set to main cause it goes master by default
             stage('gitclone') {
                 steps {
                     git branch: 'main', url: 'https://github.com/r-yabyab/rainbowdarkness-server.git'
