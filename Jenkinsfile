@@ -2,7 +2,7 @@ pipeline {
     // need to config Jenkins settings to get this part running
     agent {label 'linux'}
 
-    // credentials in Jenkins setting (name, user, pw)
+    // credentials in Jenkins settings (name, user, pw)
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
     }
